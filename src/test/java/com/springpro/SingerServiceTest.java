@@ -77,6 +77,23 @@ public class SingerServiceTest {
         log.info(singer.toString());
     }
 
+    @Test
+    public void testUpdate(){
+        Singer singer = singerRepository.findById(1L);
+        //making sure such singer exists
+        assertNotNull(singer);
+        //making sure we got expected singer
+        assertEquals("Mayer", singer.getLastName());
+        //retrieve the album
+        Album album = singer.getAlbums().stream().filter(
+                a -> a.getTitle().equals("Battle Studies")).findFirst().get();
+        singer.setFirstName("John Clayton");
+        singer.removeAlbum(album);
+        singerRepository.save(singer);
+        // test the update
+        listSingersWithAlbum(singerRepository.findAllWithAlbum());
+    }
+
     private static void listSingers(List<Singer> singers) {
         log.info(" ---- Listing singers:");
         for (Singer singer : singers) {

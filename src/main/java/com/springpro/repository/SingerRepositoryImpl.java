@@ -24,15 +24,17 @@ public class SingerRepositoryImpl implements SingerRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Singer> findAllWithAlbum() {
         return sessionFactory.getCurrentSession().getNamedQuery("Singer.findAllWithAlbum").list();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Singer findById(Long id) {
-        return sessionFactory
+        return (Singer) sessionFactory
                 .getCurrentSession()
-                .createQuery("from Singer s where s.id = :id", Singer.class)
+                .getNamedQuery("Singer.findById")
                 .setParameter("id", id)
                 .getSingleResult();
     }
