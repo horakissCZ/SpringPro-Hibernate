@@ -47,7 +47,8 @@ public class SingerRepositoryImpl implements SingerRepository {
     }
 
     @Override
-    public void delete(Singer contact) {
-
+    public void delete(Singer singer) {
+        sessionFactory.getCurrentSession().delete(singer);
+        log.info("Singer deleted with id: " + singer.getId());
     }
 }

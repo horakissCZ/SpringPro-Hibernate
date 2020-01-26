@@ -94,6 +94,15 @@ public class SingerServiceTest {
         listSingersWithAlbum(singerRepository.findAllWithAlbum());
     }
 
+    @Test
+    public void testDelete(){
+        Singer singer = singerRepository.findById(2l);
+        //making sure such singer exists
+        assertNotNull(singer);
+        singerRepository.delete(singer);
+        listSingersWithAlbum(singerRepository.findAllWithAlbum());
+    }
+
     private static void listSingers(List<Singer> singers) {
         log.info(" ---- Listing singers:");
         for (Singer singer : singers) {
