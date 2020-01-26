@@ -30,12 +30,18 @@ public class SingerRepositoryImpl implements SingerRepository {
 
     @Override
     public Singer findById(Long id) {
-        return null;
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("from Singer s where s.id = :id", Singer.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 
     @Override
-    public Singer save(Singer contact) {
-        return null;
+    public Singer save(Singer singer) {
+        sessionFactory.getCurrentSession().saveOrUpdate(singer);
+        log.info("Singer saved with id: " + singer.getId());
+        return singer;
     }
 
     @Override
