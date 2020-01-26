@@ -2,6 +2,7 @@ package com.springpro.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -38,6 +39,7 @@ public class Album implements Serializable {
     private int version;
 
     @ManyToOne
-    @JoinColumn(name = "singer_id")
+    @JoinColumn(name = "SINGER_ID")
+    @EqualsAndHashCode.Exclude
     private Singer singer;
 }

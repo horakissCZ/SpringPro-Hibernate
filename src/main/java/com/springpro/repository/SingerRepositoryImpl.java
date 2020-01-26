@@ -25,7 +25,7 @@ public class SingerRepositoryImpl implements SingerRepository {
 
     @Override
     public List<Singer> findAllWithAlbum() {
-        return null;
+        return sessionFactory.getCurrentSession().getNamedQuery("Singer.findAllWithAlbum").list();
     }
 
     @Override

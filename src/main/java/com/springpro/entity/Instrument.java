@@ -2,6 +2,7 @@ package com.springpro.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -29,9 +30,10 @@ public class Instrument implements Serializable {
     private String instrumentId;
 
     @ManyToMany
-    @JoinTable(name = "singer_instrument"
-            , joinColumns = @JoinColumn(name = "instrument_id")
-            , inverseJoinColumns = @JoinColumn(name = "singer_id"))
+    @JoinTable(name = "singer_instrument",
+            joinColumns = @JoinColumn(name = "INSTRUMENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "SINGER_ID"))
+    @EqualsAndHashCode.Exclude
     private Set<Singer> singers = new HashSet<>();
 
 

@@ -1,6 +1,8 @@
 package com.springpro;
 
 import com.springpro.configuration.AppConfiguration;
+import com.springpro.entity.Album;
+import com.springpro.entity.Instrument;
 import com.springpro.entity.Singer;
 import com.springpro.repository.SingerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +18,7 @@ public class SpringProHibernateApplication {
 		GenericApplicationContext ctx =
 				new AnnotationConfigApplicationContext(AppConfiguration.class);
 		SingerRepository singerDao = ctx.getBean(SingerRepository.class);
-		listSingers(singerDao.findAll());
+		listSingers(singerDao.findAllWithAlbum());
 		ctx.close();
 	}
 
@@ -24,6 +26,22 @@ public class SpringProHibernateApplication {
 		log.info(" ---- Listing singers:");
 		for (Singer singer : singers) {
 			log.info(singer.toString());
+			listChildren(singer);
+		}
+	}
+
+	private static void listChildren(Singer singer) {
+		log.info(singer.toString());
+		if (singer.getAlbums() != null) {
+			for (Album album :
+					singer.getAlbums()) {
+				log.info("\t" + album.toString());
+			}
+		}
+		if (singer.getInstruments() != null) {
+			for (Instrument instrument : singer.getInstruments()) {
+				log.info("\t" + instrument.getInstrumentId());
+			}
 		}
 	}
 
