@@ -1,6 +1,6 @@
 package com.springpro;
 
-import com.springpro.configuration.AppConfiguration;
+import com.springpro.configuration.AdvancedConfiguration;
 import com.springpro.entity.Album;
 import com.springpro.entity.Instrument;
 import com.springpro.entity.Singer;
@@ -27,7 +27,7 @@ public class SingerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        ctx = new AnnotationConfigApplicationContext(AppConfiguration.class);
+        ctx = new AnnotationConfigApplicationContext(AdvancedConfiguration.class);
         singerRepository = ctx.getBean(SingerRepository.class);
         assertNotNull(singerRepository);
     }
@@ -96,7 +96,7 @@ public class SingerServiceTest {
 
     @Test
     public void testDelete(){
-        Singer singer = singerRepository.findById(2l);
+        Singer singer = singerRepository.findById(2L);
         //making sure such singer exists
         assertNotNull(singer);
         singerRepository.delete(singer);
